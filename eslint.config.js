@@ -14,9 +14,17 @@ export default [
     ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
   },
 
+  {
+    ...pluginVue.configs['flat/essential'],
+    rules: {
+      ...pluginVue.configs['flat/essential'].rules,
+      'vue/multi-word-component-names': 'off',
+    },
+  },
+
   ...pluginVue.configs['flat/essential'],
   ...vueTsEslintConfig(),
-  
+
   {
     ...pluginVitest.configs.recommended,
     files: ['src/**/__tests__/*'],

@@ -1,9 +1,12 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import * as plugins from './plugins'
-import './assets/main.css'
+import router from './router'
+import './assets/scss/main.scss'
 
 const app = createApp(App)
+
+app.use(router)
 
 plugins.setupNaiveUI(app)
 

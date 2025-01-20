@@ -1,25 +1,18 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { NConfigProvider, NMessageProvider } from 'naive-ui'
+import { ruRU, dateRuRU } from 'naive-ui'
 
-const model = reactive({
-  username: '',
-  password: ''
-})
 </script>
 
 <template>
-  <n-input
-    type="text"
-    v-model:value="model.username"
-    placeholder="Имя пользователя"
-  />
-  <n-input
-    type="password"
-    v-model:value="model.password"
-    placeholder="Пароль"
-    show-password-on="click"
-  />
-  <n-button>Войти</n-button>
+  <n-config-provider
+    :locale="ruRU"
+    :date-locale="dateRuRU"
+  >
+    <n-message-provider>
+      <router-view />
+    </n-message-provider>
+  </n-config-provider>
 </template>
 
 <style scoped>
