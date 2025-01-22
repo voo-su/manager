@@ -1,24 +1,19 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { DashboardService } from '@/services/dashboard-service'
-import type { IDashboardStatistic, IChartData } from '@/types/dashboard'
+import type { IDashboardStatistic } from '@/types/dashboard'
+import type { IChart } from '@/types/base'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 import DashboardStatistic from '@/components/DashboardStatistic.vue'
 import BaseChart from '@/components/base/BaseChart.vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const statistics = ref<IDashboardStatistic>()
-const charLabels = ref<string[]>(['1', '2', '3', '4'])
-const chartData = ref<IChartData[]>([
-  {
-    type: 'line',
-    label: 'Сообщения в личных чатах',
-    data: [10, 20, 30, 40]
-  }, {
-    type: 'line',
-    label: 'Сообщения в групповых чатах',
-    data: [50, 50, 50, 50],
-  }
-])
+const chart = ref<IChart>({
+  labels: [],
+  data: []
+})
 
 const load = async () => {
   try {
@@ -41,10 +36,9 @@ const load = async () => {
       privateMessages: privateMessages,
     }
 
-    charLabels.value = charts.labels
-    chartData.value = charts.data
-  } catch (error) {
-    console.error('Ошибка:', error)
+    chart.value = charts
+  } catch (err) {
+    console.error('Error:', err)
   }
 }
 
@@ -57,9 +51,8 @@ onMounted(() => {
   <default-layout>
     <dashboard-statistic :data="statistics"/>
     <base-chart
-      title="Статистика сообщений"
-      :labels="charLabels"
-      :data="chartData"
+      :title="t('messageStats')"
+      :data="chart"
     />
   </default-layout>
 </template>

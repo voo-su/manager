@@ -1,7 +1,8 @@
 import axios from 'axios'
 
-const client = axios.create({
-  baseURL: import.meta.env.VITE_BASE_API,
+const instance = axios.create({
+  baseURL: `${import.meta.env.VITE_BASE_API}/manager`,
+  timeout: 1000
 })
 
-export default client
+export default instance

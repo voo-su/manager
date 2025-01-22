@@ -4,25 +4,42 @@ import type { IChart } from '@/types/base'
 import { Chart, registerables } from 'chart.js'
 import type { ChartItem } from 'chart.js'
 
+/**
+ * {
+ *   labels: ['1', '2', '3', '4'],
+ *   data: [
+ *     {
+ *       type: 'line',
+ *       label: '',
+ *       data: [10, 20, 30, 40]
+ *     }, {
+ *       type: 'line',
+ *       label: '',
+ *       data: [50, 50, 50, 50],
+ *     }
+ *   ]
+ * }
+ */
 const props = defineProps<{
   title: string
-  labels: string[]
-  data: IChart[]
+  data: IChart
 }>()
 
 const chartRef = ref<ChartItem>()
 const chart = ref()
 
 const init = () => {
-  const ctx = chartRef.value instanceof HTMLCanvasElement ? chartRef.value.getContext('2d') : chartRef.value
+  const ctx = chartRef.value instanceof HTMLCanvasElement
+    ? chartRef.value.getContext('2d')
+    : chartRef.value
 
   if (ctx){
     Chart.register(...registerables)
     chart.value = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: props.labels,
-        datasets: props.data
+        labels: props.data.labels,
+        datasets: props.data.data
       }
     })
   }

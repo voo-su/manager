@@ -11,12 +11,6 @@ export interface IDashboardResponse {
   }
 }
 
-export interface IChartData {
-  type: string
-  label: string
-  data: number[]
-}
-
 export interface IDashboardStatistic {
   users: number
   bots: number

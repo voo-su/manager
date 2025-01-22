@@ -9,5 +9,6 @@ const app = createApp(App)
 app.use(router)
 
 plugins.setupNaiveUI(app)
+plugins.setLocale(app)
 
 app.mount('#app')
