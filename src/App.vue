@@ -1,18 +1,12 @@
 <script setup lang="ts">
-import { NConfigProvider, NMessageProvider } from 'naive-ui'
-import { ruRU, dateRuRU } from 'naive-ui'
-
+import { ElConfigProvider } from 'element-plus'
+import ru from 'element-plus/dist/locale/ru.mjs'
 </script>
 
 <template>
-  <n-config-provider
-    :locale="ruRU"
-    :date-locale="dateRuRU"
-  >
-    <n-message-provider>
-      <router-view />
-    </n-message-provider>
-  </n-config-provider>
+  <el-config-provider :locale="ru">
+    <router-view />
+  </el-config-provider>
 </template>
 
 <style scoped>

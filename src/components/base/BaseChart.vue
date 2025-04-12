@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps, onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import type { IChart } from '@/types/base'
 import { Chart, registerables } from 'chart.js'
 import type { ChartItem } from 'chart.js'

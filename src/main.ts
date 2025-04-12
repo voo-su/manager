@@ -1,14 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import * as plugins from './plugins'
 import router from './router'
-import './assets/scss/main.scss'
+import { instanceI18n } from '@/utils/i18n'
+import './assets/styles/main.scss'
+
+const i18n = instanceI18n()
 
 const app = createApp(App)
-
-app.use(router)
-
-plugins.setupNaiveUI(app)
-plugins.setLocale(app)
+  .use(router)
+  .use(i18n as any)
 
 app.mount('#app')
